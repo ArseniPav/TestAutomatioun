@@ -2,18 +2,20 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class TextInputPage extends BasePage{
+public class TextInputPage extends BasePage {
 
-    By inputText = By.xpath("//input[@id='newButtonName']");
-    By button = By.xpath("//button[@id='updatingButton']");
+    private final By inputText = By.xpath("//input[@id='newButtonName']");
+    private final By button = By.xpath("//button[@id='updatingButton']");
 
-    public String setText(String textToType){
+    public String setText(String textToType) {
         driver.findElement(inputText).sendKeys(textToType);
         driver.findElement(button).click();
         return textToType;
     }
-    public String getTextFromButton(){
+
+    public String getTextFromButton() {
         return driver.findElement(button).getText();
     }
 

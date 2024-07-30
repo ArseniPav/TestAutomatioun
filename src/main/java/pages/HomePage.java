@@ -16,7 +16,8 @@ public class HomePage extends BasePage{
     }
 
     public enum Links{
-        TEXT_INPUT("Text Input");
+        TEXT_INPUT("Text Input"),
+        DYNAMIC_TABLE("Dynamic Table");
 
         final String linkValue;
 
