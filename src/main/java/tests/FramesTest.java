@@ -30,7 +30,6 @@ public class FramesTest extends BaseTest {
         driver.switchTo().frame(4).findElement(framePage.frame5Input).sendKeys("Это фрейм 5");
 
 
-
         System.out.println("Test");
     }
 }

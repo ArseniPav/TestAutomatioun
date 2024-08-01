@@ -29,8 +29,8 @@ public class DynamicTablePage extends BasePage {
         return 0;
     }
 
-    public void getTableValue() {
-        driver.findElements(chromeRow).get(getCpuIndex() - 1).getText();
+    public String getTableValue() {
+        return driver.findElements(chromeRow).get(getCpuIndex() - 1).getText();
     }
 
     public DynamicTablePage(WebDriver driver) {

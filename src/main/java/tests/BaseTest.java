@@ -5,32 +5,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import pages.DynamicTablePage;
-import pages.FramePage;
-import pages.HomePage;
-import pages.TextInputPage;
+import pages.*;
 
 import java.io.FileInputStream;
+import java.time.Duration;
 import java.util.Properties;
 
 public class BaseTest {
 
     protected HomePage homePage = new HomePage(setUp());
     protected TextInputPage textInputPage = new TextInputPage(setUp());
-    protected DynamicTablePage dynamicTableTest = new DynamicTablePage(setUp());
+    protected DynamicTablePage dynamicTablePage = new DynamicTablePage(setUp());
     protected FramePage framePage = new FramePage(setUp());
-
+    protected AlertsPage alertsPage = new AlertsPage(setUp());
 
     protected WebDriver driver;
 
-
     private WebDriver setUp() {
-
         WebDriverManager.chromedriver().setup();
+
         if (driver == null) {
             driver = new ChromeDriver();
         }
         driver.manage().window().maximize();//через класс manage произходят все манипуляции драйвера
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         return driver;
     }
 
@@ -40,11 +38,11 @@ public class BaseTest {
     }
 
 
-//    @AfterClass
-//    public void tearDawn() {
-//        driver.quit();//закроется браузер
-//        //driver.close();//закроет последнию вкладку
-//    }
+    @AfterClass
+    public void tearDawn() {
+        driver.quit();//закроется браузер
+        //driver.close();//закроет последнию вкладку
+    }
 
     public String getFromProperties(String propertyKey) {
         Properties props = new Properties();
