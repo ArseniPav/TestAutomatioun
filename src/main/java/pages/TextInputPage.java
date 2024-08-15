@@ -1,25 +1,29 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.codeborne.selenide.SelenideElement;
+
+
+import static com.codeborne.selenide.Selenide.$x;
 
 public class TextInputPage extends BasePage {
 
-    private final By inputText = By.xpath("//input[@id='newButtonName']");
-    private final By button = By.xpath("//button[@id='updatingButton']");
+    private SelenideElement inputText = $x("//input[@id='newButtonName']");
+    private SelenideElement button = $x("//button[@id='updatingButton']");
+
+
+    //WebElement element = driver.findElement(By.xpath("//input[@id='newButtonName']"));
 
     public String setText(String textToType) {
-        driver.findElement(inputText).sendKeys(textToType);
-        driver.findElement(button).click();
+//        driver.findElement(inputText).sendKeys(textToType);
+//        driver.findElement(button).click();
+        inputText.sendKeys(textToType);
+        button.click();
         return textToType;
     }
 
     public String getTextFromButton() {
-        return driver.findElement(button).getText();
+//      return driver.findElement(button).getText();
+        return button.getText();
     }
 
-    public TextInputPage(WebDriver driver) {
-        super(driver);
-    }
 }

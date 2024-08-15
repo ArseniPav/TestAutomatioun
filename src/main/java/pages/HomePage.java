@@ -1,24 +1,20 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage extends BasePage{
 
     String linkPattern = "$x//h3/a[text()='%s']";
 
     public void getTestDirectory(Links targetLinks){
-        driver.findElement(By.xpath(String.format(linkPattern,targetLinks.linkValue))).click();
-    }
-
-    public HomePage(WebDriver driver){
-        super(driver);//Обращение к методу родителя
+       $x(String.format(linkPattern,targetLinks.linkValue)).click();
     }
 
     public enum Links{
         TEXT_INPUT("Text Input"),
         DYNAMIC_TABLE("Dynamic Table"),
-        ALERTS("Alerts");
+        ALERTS("Alerts"),
+        UPLOAD("File Uploads");
 
         final String linkValue;
 

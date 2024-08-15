@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Selenide;
 import org.testng.annotations.Test;
 import pages.HomePage;
 
@@ -11,25 +12,25 @@ public class AlertTest extends BaseTest {
         homePage.getTestDirectory(HomePage.Links.ALERTS);
 
         alertsPage.clickAlert();
-        driver.switchTo().alert().accept();
+        Selenide.switchTo().alert().accept();
 
         int day = LocalDate.now().getDayOfWeek().getValue();
 
         alertsPage.clickConfirm();
         if (day == 5) {
-            driver.switchTo().alert().accept();// подтвердить
+            Selenide.switchTo().alert().accept();// подтвердить
         } else {
-            driver.switchTo().alert().dismiss();// отменить
-            driver.switchTo().alert().accept();
+            Selenide.switchTo().alert().dismiss();// отменить
+            Selenide.switchTo().alert().accept();
         }
 
         String textToType = "test";
         String expected = "User value: %s";
 
         alertsPage.clickPromt();
-        driver.switchTo().alert().sendKeys(textToType);
-        driver.switchTo().alert().accept();
-        driver.switchTo().alert().accept();
-        driver.switchTo().alert();
+        Selenide.switchTo().alert().sendKeys(textToType);
+        Selenide.switchTo().alert().accept();
+        Selenide.switchTo().alert().accept();
+        Selenide.switchTo().alert();
     }
 }

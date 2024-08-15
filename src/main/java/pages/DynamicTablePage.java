@@ -1,26 +1,26 @@
 package pages;
 
-import org.openqa.selenium.By;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
+import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class DynamicTablePage extends BasePage {
 
-    By expectedValue = By.xpath("//div[@class='container']/p[@class='bg-warning']");
-    By columnHeaders = By.xpath("//span[@role='columnheader']");
-    By chromeRow = By.xpath("//span[@role='cell' and text()='Chrome']/following-sibling::span");
+    SelenideElement expectedValue = $x("//div[@class='container']/p[@class='bg-warning']");
+    ElementsCollection columnHeaders = $$x("//span[@role='columnheader']");
+    ElementsCollection chromeRow = $$x("//span[@role='cell' and text()='Chrome']/following-sibling::span");
 
 
     public String getExpectedValue() {
-        String expectedTense = driver.findElement(expectedValue).getText();
+        String expectedTense = expectedValue.getText();
         //return expectedTense.split(": ")[1];
         return expectedTense.substring(12);
     }
 
     private int getCpuIndex() {
-        List<WebElement> headers = driver.findElements(columnHeaders);
+        ElementsCollection headers = columnHeaders;
         for (int i = 0; i < headers.size(); i++) {
             if (headers.get(i).getText().equals("CPU")) {
                 return i;
@@ -30,10 +30,7 @@ public class DynamicTablePage extends BasePage {
     }
 
     public String getTableValue() {
-        return driver.findElements(chromeRow).get(getCpuIndex() - 1).getText();
+        return chromeRow.get(getCpuIndex() - 1).getText();
     }
 
-    public DynamicTablePage(WebDriver driver) {
-        super(driver);
-    }
 }

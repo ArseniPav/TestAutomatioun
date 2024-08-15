@@ -1,52 +1,66 @@
 package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import pages.*;
 
 import java.io.FileInputStream;
-import java.time.Duration;
 import java.util.Properties;
+
+import static com.codeborne.selenide.Selenide.open;
+
 
 public class BaseTest {
 
-    protected HomePage homePage = new HomePage(setUp());
-    protected TextInputPage textInputPage = new TextInputPage(setUp());
-    protected DynamicTablePage dynamicTablePage = new DynamicTablePage(setUp());
-    protected FramePage framePage = new FramePage(setUp());
-    protected AlertsPage alertsPage = new AlertsPage(setUp());
+    protected HomePage homePage = new HomePage();
+    protected TextInputPage textInputPage = new TextInputPage();
+    protected DynamicTablePage dynamicTablePage = new DynamicTablePage();
+    protected FramePage framePage = new FramePage();
+    protected AlertsPage alertsPage = new AlertsPage();
+    protected UploadPage uploadPage = new UploadPage();
 
-    protected WebDriver driver;
 
-    private WebDriver setUp() {
-        WebDriverManager.chromedriver().setup();
+//    private WebDriver setUp() {
+//
+//        switch (System.getProperty("browser","Chrome")) {
+//            case "Chrome":
+//                WebDriverManager.chromedriver().setup();
+//                driver = new ChromeDriver();
+//                break;
+//            case "Firefox":
+//                WebDriverManager.firefoxdriver().setup();
+//                driver= new FirefoxDriver();
+//                break;
+//            default: {
+//                System.out.println("Неверное имя браузера");
+//            }
+//        }
+//
+//        driver.manage().window().maximize();//через класс manage произходят все манипуляции драйвера
+//        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+//        return driver;
+//    }
 
-        if (driver == null) {
-            driver = new ChromeDriver();
-        }
-        driver.manage().window().maximize();//через класс manage произходят все манипуляции драйвера
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        return driver;
+    @BeforeSuite
+    public void setUp() {
+        Configuration.browser = System.getProperty("browser", "Chrome");
+        Configuration.downloadsFolder = "src/main/resources/downloadDirectory";
+        Configuration.fastSetValue = true;
     }
 
     @BeforeClass
     public void startTest() {
-        driver.get(getFromProperties("homeUrl"));
-    }
-
-
-    @AfterClass
-    public void tearDawn() {
-        driver.quit();//закроется браузер
-        //driver.close();//закроет последнию вкладку
+        open(getFromProperties("homeUrl"));
+        WebDriverRunner.getWebDriver().manage().window().maximize();
     }
 
     public String getFromProperties(String propertyKey) {
         Properties props = new Properties();
-
         try {
             FileInputStream inputStream = new FileInputStream("src/main/resources/application.properties");
             props.load(inputStream);

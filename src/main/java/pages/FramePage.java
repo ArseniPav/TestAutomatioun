@@ -1,22 +1,18 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$x;
 
-public class FramePage extends BasePage{
+public class FramePage extends BasePage {
 
-    public By frameInput = By.xpath("//input[@name='mytext1']");
-    public By frame2Input = By.xpath("//input[@name='mytext2']");
-    public By frame3Input = By.xpath("//input[@name='mytext3']");
-    public By frame4Input = By.xpath("//input[@name='mytext4']");
-    public By frame5Input = By.xpath("//input[@name='mytext5']");
+    public SelenideElement frameInput = $x("//input[@name='mytext1']");
+    public SelenideElement frame2Input = $x("//input[@name='mytext2']");
+    public SelenideElement frame3Input = $x("//input[@name='mytext3']");
+    public SelenideElement frame4Input = $x("//input[@name='mytext4']");
+    public SelenideElement frame5Input = $x("//input[@name='mytext5']");
 
-    public void getFromByIndex(int frameIndex){
-        driver.switchTo().frame(frameIndex);
-    }
-
-
-    public FramePage(WebDriver driver) {
-        super(driver);
+    public void getFromByIndex(int frameIndex) {
+        Selenide.switchTo().frame(frameIndex);
     }
 }
