@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage extends BasePage{
 
-    String linkPattern = "$x//h3/a[text()='%s']";
+    String linkPattern = "//h3/a[text()='%s']";
 
     @Step("Переход по ссылке {targetLinks}")
     public void getTestDirectory(Links targetLinks){

@@ -15,8 +15,6 @@ public class TextInputTest extends BaseTest {
 //        takeScreenshot();
         String startButtonValue = textInputPage.getTextFromButton();
 
-        textInputPage.
-
         String expectedText = textInputPage.setText("HelloWorld");
 //        takeScreenshot();
         String actualText = textInputPage.getTextFromButton();
@@ -24,5 +22,6 @@ public class TextInputTest extends BaseTest {
         Assert.assertEquals(expectedText, actualText);
         Assert.assertNotEquals(actualText, startButtonValue);
     }
+
 
 }
