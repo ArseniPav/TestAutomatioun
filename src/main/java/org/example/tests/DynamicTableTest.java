@@ -1,8 +1,8 @@
-package tests;
+package org.example.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import org.example.pages.HomePage;
 
 public class DynamicTableTest extends BaseTest {
 

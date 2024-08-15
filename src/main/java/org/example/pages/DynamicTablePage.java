@@ -1,21 +1,19 @@
-package pages;
+package org.example.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebDriver;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class DynamicTablePage extends BasePage {
 
-    SelenideElement expectedValue = $x("//div[@class='container']/p[@class='bg-warning']");
+    SelenideElement expectedValue = $x("//p[@class='bg-warning']");
     ElementsCollection columnHeaders = $$x("//span[@role='columnheader']");
-    ElementsCollection chromeRow = $$x("//span[@role='cell' and text()='Chrome']/following-sibling::span");
+    ElementsCollection chromeRow = $$x("//div//span[text()='Chrome']/following-sibling::span");
 
 
     public String getExpectedValue() {
         String expectedTense = expectedValue.getText();
-        //return expectedTense.split(": ")[1];
         return expectedTense.substring(12);
     }
 

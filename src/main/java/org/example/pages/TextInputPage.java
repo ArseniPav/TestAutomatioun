@@ -1,6 +1,7 @@
-package pages;
+package org.example.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -11,8 +12,7 @@ public class TextInputPage extends BasePage {
     private SelenideElement button = $x("//button[@id='updatingButton']");
 
 
-    //WebElement element = driver.findElement(By.xpath("//input[@id='newButtonName']"));
-
+    @Step("Изменение текста кнопки на {textToType}")
     public String setText(String textToType) {
 //        driver.findElement(inputText).sendKeys(textToType);
 //        driver.findElement(button).click();
@@ -21,8 +21,8 @@ public class TextInputPage extends BasePage {
         return textToType;
     }
 
+    @Step("Получение текста с кнопки")
     public String getTextFromButton() {
-//      return driver.findElement(button).getText();
         return button.getText();
     }
 
